@@ -5,111 +5,136 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Exact Toggle Switch</title>
 <style>
-  body {
-    margin: 0;
-    font-family: sans-serif;
-    transition: background-color 0.5s, color 0.5s;
-  }
-  body.light {
-    background-color: #f2f2f2;
-    color: #222;
-  }
-  body.dark {
-    background-color: #121212;
-    color: #eee;
-  }
+body {
+  margin: 0;
+  font-family: sans-serif;
+  transition: background-color 0.5s, color 0.5s;
+}
+body.light {
+  background-color: #f2f2f2;
+  color: #222;
+}
+body.dark {
+  background-color: #121212;
+  color: #eee;
+}
 
-  .section {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-size: 40px 40px;
-    background-image: radial-gradient(circle, var(--dotted-color) 1px, transparent 1px);
-    transition: background-image 0.5s;
-  }
-  .light-section {
-    --dotted-color: rgba(0, 0, 0, 0.1);
-  }
-  .dark-section {
-    --dotted-color: rgba(255, 255, 255, 0.2);
-  }
+.section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: 40px 40px;
+  background-image: radial-gradient(circle, var(--dotted-color) 1px, transparent 1px);
+  transition: background-image 0.5s;
+}
+.light-section {
+  --dotted-color: rgba(0, 0, 0, 0.1);
+}
+.dark-section {
+  --dotted-color: rgba(255, 255, 255, 0.2);
+}
 
-  header {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    z-index: 100;
-  }
+header {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 100;
+}
 
-  .toggle {
-    position: relative;
-    width: 98px;
-    height: 50px;
-    background-color: #333;
-    border-radius: 46px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 10px;
-    box-sizing: border-box;
-  }
+.toggle {
+  position: relative;
+  width: 98px;
+  height: 50px;
+  border-radius: 46px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
 
-  .icon-wrapper {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
-  }
-  .icon-wrapper svg {
-    width: 25px;
-    height: 25px;
-    display: block;
-  }
+/* Light mode toggle background */
+body.light .toggle {
+  background-color: rgba(255, 166, 21, 0.2);
+}
 
-  .sun-wrapper {
-    background-color: #000;
-  }
-  .sun-wrapper svg * {
-    stroke: #ffb100;
-    fill: #ffb100;
-  }
-  .moon-wrapper svg path {
-    fill: #555;
-  }
+/* Dark mode toggle background */
+body.dark .toggle {
+  background-color: rgba(255, 255, 255, 0.2);
+}
 
-  body.dark .sun-wrapper {
-    background-color: transparent;
-  }
-  body.dark .sun-wrapper svg * {
-    stroke: #555;
-    fill: #555;
-  }
-  body.dark .moon-wrapper {
-    background-color: #000;
-  }
-  body.dark .moon-wrapper svg path {
-    fill: #ffb100;
-  }
+.icon-wrapper {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+.icon-wrapper svg {
+  width: 25px;
+  height: 25px;
+  display: block;
+}
+.icon-wrapper svg * {
+  transition: fill 0.3s ease, stroke 0.3s ease, opacity 0.3s ease;
+}
 
-  .circle {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 35px;
-    height: 35px;
-    background-color: transparent;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-    pointer-events: none;
-  }
-  body.dark .circle {
-    transform: translateX(44px);
-  }
+/* Sun wrapper default background */
+.sun-wrapper {
+  background-color: #000;
+}
+body.dark .sun-wrapper {
+  background-color: transparent;
+}
+
+/* Moon wrapper default background */
+body.dark .moon-wrapper {
+  background-color: #000;
+}
+
+/* LIGHT MODE: Sun active, Moon inactive */
+body.light .sun-wrapper svg * {
+  stroke: #ffa615;
+  fill: #ffa615;
+  opacity: 1;
+}
+body.light .moon-wrapper svg * {
+  fill: #000000;
+  stroke: #000000;
+  opacity: 0.3;
+}
+
+/* DARK MODE: Moon active, Sun inactive */
+body.dark .moon-wrapper svg * {
+  fill: #ffa615;
+  stroke: #ffa615;
+  opacity: 1;
+}
+body.dark .sun-wrapper svg * {
+  fill: #000000;
+  stroke: #000000;
+  opacity: 0.3;
+}
+
+.circle {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 35px;
+  height: 35px;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+body.dark .circle {
+  transform: translateX(44px);
+}
+
 </style>
 </head>
 <body class="light">
